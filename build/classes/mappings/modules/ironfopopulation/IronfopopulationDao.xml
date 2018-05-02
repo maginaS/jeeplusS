@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.ironfopopulation.dao.IronfopopulationDao">
+    
+	<sql id="ironfopopulationColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.doc_id AS "doc_id",
+		a.zjzmj AS "zjzmj",
+		a.dxjzmj AS "dxjzmj",
+		a.dtjzsl AS "dtjzsl",
+		a.jzgd AS "jzgd"
+	</sql>
+	
+	<sql id="ironfopopulationJoins">
+	</sql>
+	
+    
+	<select id="get" resultType="Ironfopopulation" >
+		SELECT 
+			<include refid="ironfopopulationColumns"/>
+		FROM ironfo_population a
+		<include refid="ironfopopulationJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Ironfopopulation" >
+		SELECT 
+			
+			a.id AS "id",
+			a.create_by AS "createBy.id",
+			a.create_date AS "createDate",
+			a.update_by AS "updateBy.id",
+			a.update_date AS "updateDate",
+			a.remarks AS "remarks",
+			a.del_flag AS "delFlag",
+			a.doc_id AS "doc_id",
+			a.zjzmj AS "zjzmj",
+			a.dxjzmj AS "dxjzmj",
+			a.dtjzsl AS "dtjzsl",
+			a.jzgd AS "jzgd"
+			
+		FROM ironfo_population a
+		<include refid="ironfopopulationJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	
+	<select id="queryForList" resultType="Ironfopopulation" >
+		SELECT 
+			
+			a.id AS "id",
+			a.create_by AS "createBy.id",
+			a.create_date AS "createDate",
+			a.update_by AS "updateBy.id",
+			a.update_date AS "updateDate",
+			a.remarks AS "remarks",
+			a.del_flag AS "delFlag",
+			a.doc_id AS "doc_id",
+			a.zjzmj AS "zjzmj",
+			a.dxjzmj AS "dxjzmj",
+			a.dtjzsl AS "dtjzsl",
+			a.jzgd AS "jzgd"
+			
+		FROM ironfo_population a
+		<include refid="ironfopopulationJoins"/>
+		<where>
+			a.doc_id = #{doc_id}
+		</where>
+		
+	</select>
+	
+	
+	<select id="findAllList" resultType="Ironfopopulation" >
+		SELECT 
+			<include refid="ironfopopulationColumns"/>
+		FROM ironfo_population a
+		<include refid="ironfopopulationJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ironfo_population(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			doc_id,
+			zjzmj,
+			dxjzmj,
+			dtjzsl,
+			jzgd
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{doc_id},
+			#{zjzmj},
+			#{dxjzmj},
+			#{dtjzsl},
+			#{jzgd}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ironfo_population SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			doc_id = #{doc_id},
+			zjzmj = #{zjzmj},
+			dxjzmj = #{dxjzmj},
+			dtjzsl = #{dtjzsl},
+			jzgd = #{jzgd}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<update id="updateIronfo">
+		UPDATE ironfo_population SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			doc_id = #{doc_id},
+			zjzmj = #{zjzmj},
+			dxjzmj = #{dxjzmj},
+			dtjzsl = #{dtjzsl},
+			jzgd = #{jzgd}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM ironfo_population
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE ironfo_population SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="Ironfopopulation" statementType="STATEMENT">
+		select * FROM ironfo_population  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>

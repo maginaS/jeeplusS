@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.ironfofivefjpz.dao.IronfofivefjpzDao">
+    
+	<sql id="ironfofivefjpzColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.doc_id AS "doc_id",
+		a.fjpz_gndy AS "fjpz_gndy",
+		a.fjpz_gndyjzmj AS "fjpz_gndyjzmj",
+		a.fjpz_remark AS "fjpz_remark"
+	</sql>
+	
+	<sql id="ironfofivefjpzJoins">
+	</sql>
+	
+    
+	<select id="get" resultType="Ironfofivefjpz" >
+		SELECT 
+			<include refid="ironfofivefjpzColumns"/>
+		FROM ironfo_five_fjpz a
+		<include refid="ironfofivefjpzJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Ironfofivefjpz" >
+		SELECT 
+			<include refid="ironfofivefjpzColumns"/>
+		FROM ironfo_five_fjpz a
+		<include refid="ironfofivefjpzJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Ironfofivefjpz" >
+		SELECT 
+			<include refid="ironfofivefjpzColumns"/>
+		FROM ironfo_five_fjpz a
+		<include refid="ironfofivefjpzJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ironfo_five_fjpz(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			doc_id,
+			fjpz_gndy,
+			fjpz_gndyjzmj,
+			fjpz_remark
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{doc_id},
+			#{fjpz_gndy},
+			#{fjpz_gndyjzmj},
+			#{fjpz_remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ironfo_five_fjpz SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			doc_id = #{doc_id},
+			fjpz_gndy = #{fjpz_gndy},
+			fjpz_gndyjzmj = #{fjpz_gndyjzmj},
+			fjpz_remark = #{fjpz_remark}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM ironfo_five_fjpz
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE ironfo_five_fjpz SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="Ironfofivefjpz" statementType="STATEMENT">
+		select * FROM ironfo_five_fjpz  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>

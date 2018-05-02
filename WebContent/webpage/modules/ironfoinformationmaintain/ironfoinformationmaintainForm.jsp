@@ -1,0 +1,91 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="/webpage/include/taglib.jsp"%>
+<html>
+<head>
+	<title>4.4系统维护人员管理</title>
+	<meta name="decorator" content="default"/>
+	<script type="text/javascript">
+		var validateForm;
+		function doSubmit(){//回调函数，在编辑和保存动作时，供openDialog调用提交表单。
+		  if(validateForm.form()){
+			  $("#inputForm").submit();
+			  return true;
+		  }
+	
+		  return false;
+		}
+		$(document).ready(function() {
+			validateForm = $("#inputForm").validate({
+				submitHandler: function(form){
+					loading('正在提交，请稍等...');
+					form.submit();
+				},
+				errorContainer: "#messageBox",
+				errorPlacement: function(error, element) {
+					$("#messageBox").text("输入有误，请先更正。");
+					if (element.is(":checkbox")||element.is(":radio")||element.parent().is(".input-append")){
+						error.appendTo(element.parent().parent());
+					} else {
+						error.insertAfter(element);
+					}
+				}
+			});
+			
+		});
+	</script>
+</head>
+<body class="hideScroll">
+		<form:form id="inputForm" modelAttribute="ironfoinformationmaintain" action="${ctx}/ironfoinformationmaintain/ironfoinformationmaintain/save" method="post" class="form-horizontal">
+		<form:hidden path="id"/>
+		<sys:message content="${message}"/>	
+		<table class="table table-bordered  table-condensed dataTables-example dataTable no-footer">
+		   <tbody>
+				<tr>
+				<%-- 	<td class="width-15 active"><label class="pull-right">备注信息：</label></td>
+					<td class="width-35">
+						<form:textarea path="remarks" htmlEscape="false" rows="4"    class="form-control "/>
+					</td>
+					<td class="width-15 active"><label class="pull-right">主表id：</label></td>
+					<td class="width-35">
+						<form:input path="doc_id" htmlEscape="false"    class="form-control "/>
+					</td> --%>
+					注：<br/>
+					职称：①初级②中级③高级④无职称<br/>
+					文化程度：①高中/中专及以下②大专③本科④研究生及以上<br/>
+					所学专业：①公共卫生②临床医学③信息统计④计算机⑤其它<br/>
+					人员配置：①乡镇卫生院职工专职②乡镇卫生院职工兼职③系统供应商职工<br/>
+					
+				</tr>
+				<tr>
+					<td class="width-15 active"><label class="pull-right">人员职称：</label></td>
+					<td class="width-35">
+						<form:input path="ryzc" htmlEscape="false"    class="form-control "/>
+					</td>
+					<td class="width-15 active"><label class="pull-right">文化程度：</label></td>
+					<td class="width-35">
+						<form:input path="whcd" htmlEscape="false"    class="form-control "/>
+					</td>
+				</tr>
+				<tr>
+					<td class="width-15 active"><label class="pull-right">所学专业：</label></td>
+					<td class="width-35">
+						<form:input path="sxzy" htmlEscape="false"    class="form-control "/>
+					</td>
+					<td class="width-15 active"><label class="pull-right">现岗工作年限：</label></td>
+					<td class="width-35">
+						<form:input path="xggznx" htmlEscape="false"    class="form-control "/>
+					</td>
+				</tr>
+				<tr>
+					<td class="width-15 active"><label class="pull-right">人员配置：</label></td>
+					<td class="width-35">
+						<form:input path="rypz" htmlEscape="false"    class="form-control "/>
+					</td>
+					<td class="width-15 active"></td>
+		   			<td class="width-35" ></td>
+		  		</tr>
+		 	</tbody>
+		</table>
+	</form:form>
+</body>
+</html>

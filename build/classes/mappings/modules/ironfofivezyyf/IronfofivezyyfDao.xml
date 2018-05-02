@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.ironfofivezyyf.dao.IronfofivezyyfDao">
+    
+	<sql id="ironfofivezyyfColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.doc_id AS "doc_id",
+		a.gndyjzmj AS "gndyjzmj",
+		a.bf AS "bf",
+		a.hsz AS "hsz",
+		a.zlzbs AS "zlzbs",
+		a.zls AS "zls",
+		a.qjs AS "qjs",
+		a.yhbgs AS "yhbgs",
+		a.zybgs AS "zybgs",
+		a.zbs AS "zbs",
+		a.ksj AS "ksj",
+		a.wsj AS "wsj",
+		a.hxj AS "hxj",
+		a.lyj AS "lyj",
+		a.zzpcs AS "zzpcs",
+		a.hds AS "hds",
+		a.brct AS "brct",
+		a.qtqzm AS "qtqzm"
+	</sql>
+	
+	<sql id="ironfofivezyyfJoins">
+	</sql>
+	
+	<select id="queryForList" resultType="Ironfofivezyyf" >
+		SELECT 
+			a.id AS "id",
+			a.create_by AS "createBy.id",
+			a.create_date AS "createDate",
+			a.update_by AS "updateBy.id",
+			a.update_date AS "updateDate",
+			a.remarks AS "remarks",
+			a.del_flag AS "delFlag",
+			a.doc_id AS "doc_id",
+			a.gndyjzmj AS "gndyjzmj",
+			a.bf AS "bf",
+			a.hsz AS "hsz",
+			a.zlzbs AS "zlzbs",
+			a.zls AS "zls",
+			a.qjs AS "qjs",
+			a.yhbgs AS "yhbgs",
+			a.zybgs AS "zybgs",
+			a.zbs AS "zbs",
+			a.ksj AS "ksj",
+			a.wsj AS "wsj",
+			a.hxj AS "hxj",
+			a.lyj AS "lyj",
+			a.zzpcs AS "zzpcs",
+			a.hds AS "hds",
+			a.brct AS "brct",
+			a.qtqzm AS "qtqzm"
+		FROM ironfo_five_zyyf a
+		
+		<where>
+			a.doc_id = #{doc_id}
+		</where>
+		
+	</select>
+	
+    
+	<select id="get" resultType="Ironfofivezyyf" >
+		SELECT 
+			<include refid="ironfofivezyyfColumns"/>
+		FROM ironfo_five_zyyf a
+		<include refid="ironfofivezyyfJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Ironfofivezyyf" >
+		SELECT 
+			<include refid="ironfofivezyyfColumns"/>
+		FROM ironfo_five_zyyf a
+		<include refid="ironfofivezyyfJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Ironfofivezyyf" >
+		SELECT 
+			<include refid="ironfofivezyyfColumns"/>
+		FROM ironfo_five_zyyf a
+		<include refid="ironfofivezyyfJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ironfo_five_zyyf(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			doc_id,
+			gndyjzmj,
+			bf,
+			hsz,
+			zlzbs,
+			zls,
+			qjs,
+			yhbgs,
+			zybgs,
+			zbs,
+			ksj,
+			wsj,
+			hxj,
+			lyj,
+			zzpcs,
+			hds,
+			brct,
+			qtqzm
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{doc_id},
+			#{gndyjzmj},
+			#{bf},
+			#{hsz},
+			#{zlzbs},
+			#{zls},
+			#{qjs},
+			#{yhbgs},
+			#{zybgs},
+			#{zbs},
+			#{ksj},
+			#{wsj},
+			#{hxj},
+			#{lyj},
+			#{zzpcs},
+			#{hds},
+			#{brct},
+			#{qtqzm}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ironfo_five_zyyf SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			doc_id = #{doc_id},
+			gndyjzmj = #{gndyjzmj},
+			bf = #{bf},
+			hsz = #{hsz},
+			zlzbs = #{zlzbs},
+			zls = #{zls},
+			qjs = #{qjs},
+			yhbgs = #{yhbgs},
+			zybgs = #{zybgs},
+			zbs = #{zbs},
+			ksj = #{ksj},
+			wsj = #{wsj},
+			hxj = #{hxj},
+			lyj = #{lyj},
+			zzpcs = #{zzpcs},
+			hds = #{hds},
+			brct = #{brct},
+			qtqzm = #{qtqzm}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<update id="updateIronfo">
+		UPDATE ironfo_five_zyyf SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			doc_id = #{doc_id},
+			gndyjzmj = #{gndyjzmj},
+			bf = #{bf},
+			hsz = #{hsz},
+			zlzbs = #{zlzbs},
+			zls = #{zls},
+			qjs = #{qjs},
+			yhbgs = #{yhbgs},
+			zybgs = #{zybgs},
+			zbs = #{zbs},
+			ksj = #{ksj},
+			wsj = #{wsj},
+			hxj = #{hxj},
+			lyj = #{lyj},
+			zzpcs = #{zzpcs},
+			hds = #{hds},
+			brct = #{brct},
+			qtqzm = #{qtqzm}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM ironfo_five_zyyf
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE ironfo_five_zyyf SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="Ironfofivezyyf" statementType="STATEMENT">
+		select * FROM ironfo_five_zyyf  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>

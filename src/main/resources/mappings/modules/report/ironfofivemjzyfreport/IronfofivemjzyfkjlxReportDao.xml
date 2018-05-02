@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.report.ironfofivemjzyfreport.dao.IronfofivemjzyfkjlxReportDao">
+    
+	<sql id="ironfofivemjzyfkjlxColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.mjzyfid AS "mjzyfId",
+		a.ghsfs AS "ghsfs",
+		a.fwzx AS "ghsfs",
+		a.fzt AS "fzt",
+		a.hzq AS "hzq",
+		a.qkylkzs AS "qkylkzs",
+		a.ptnkzsnkyf AS "ptnkzsnkyf",
+		a.cdjfrmzsnkyf AS "cdjfrmzsnkyf",
+		a.ptwkzswkyf AS "ptwkzswkyf",
+		a.gkzswkyf AS "gkzswkyf",
+		a.fckzsfckyf AS "fckzsfckyf",
+		a.jcsfckyf AS "jcsfckyf",
+		a.ekzs AS "ekzs",
+		a.zykzszykyf AS "zykzszykyf",
+		a.zyzlszykyf AS "zyzlszykyf",
+		a.kqkzskqkyf AS "kqkzskqkyf",
+		a.kqzlskqkyf AS "kqzlskqkyf",
+		a.jgskqkyf AS "jgskqkyf",
+		a.ykzs AS "ykzs",
+		a.ebhkzs AS "ebhkzs",
+		a.pfkzs AS "pfkzs",
+		a.grxjbkzsgrxjbkyf AS "grxjbkzsgrxjbkyf",
+		a.glsgrxjbkyf AS "glsgrxjbkyf",
+		a.kfkzskfkyf AS "kfkzskfkyf",
+		a.xyllskfkyf AS "xyllskfkyf",
+		a.ydzlskfkyf AS "ydzlskfkyf",
+		a.yyzlskfkyf AS "yyzlskfkyf",
+		a.hszsyyf AS "hszsyyf",
+		a.zlzbssyyf AS "zlzbssyyf",
+		a.zsssyyf AS "zsssyyf",
+		a.syssyyf AS "syssyyf",
+		a.zsgcssyyf AS "zsgcssyyf",
+		a.jzkzsjzkyf AS "jzkzsjzkyf",
+		a.qjsjzkyf AS "qjsjzkyf",
+		a.lgsjzkyf AS "lgsjzkyf",
+		a.yszbsjzkyf AS "yszbsjzkyf",
+		a.qtqzm AS "qtqzm",
+		a.doc_id AS "doc_id"
+	</sql>
+	
+	<sql id="ironfofivemjzyfkjlxJoins">
+	</sql>
+	
+    
+	<select id="get" resultType="Ironfofivemjzyfkjlx" >
+		SELECT 
+			<include refid="ironfofivemjzyfkjlxColumns"/>
+		FROM ironfo_five_mjzyf_kjlx a
+		<include refid="ironfofivemjzyfkjlxJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Ironfofivemjzyfkjlx" >
+		SELECT 
+			<include refid="ironfofivemjzyfkjlxColumns"/>
+		FROM ironfo_five_mjzyf_kjlx a
+		<include refid="ironfofivemjzyfkjlxJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Ironfofivemjzyfkjlx" >
+		SELECT 
+			<include refid="ironfofivemjzyfkjlxColumns"/>
+		FROM ironfo_five_mjzyf_kjlx a
+		<include refid="ironfofivemjzyfkjlxJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ironfo_five_mjzyf_kjlx(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			mjzyfid,
+			ghsfs,
+			fwzx,
+			fzt,
+			hzq,
+			qkylkzs,
+			ptnkzsnkyf,
+			cdjfrmzsnkyf,
+			ptwkzswkyf,
+			gkzswkyf,
+			fckzsfckyf,
+			jcsfckyf,
+			ekzs,
+			zykzszykyf,
+			zyzlszykyf,
+			kqkzskqkyf,
+			kqzlskqkyf,
+			jgskqkyf,
+			ykzs,
+			ebhkzs,
+			pfkzs,
+			grxjbkzsgrxjbkyf,
+			glsgrxjbkyf,
+			kfkzskfkyf,
+			xyllskfkyf,
+			ydzlskfkyf,
+			yyzlskfkyf,
+			hszsyyf,
+			zlzbssyyf,
+			zsssyyf,
+			syssyyf,
+			zsgcssyyf,
+			jzkzsjzkyf,
+			qjsjzkyf,
+			lgsjzkyf,
+			yszbsjzkyf,
+			qtqzm,
+			doc_id
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{mjzyfId},
+			#{ghsfs},
+			#{ghsfs},
+			#{fzt},
+			#{hzq},
+			#{qkylkzs},
+			#{ptnkzsnkyf},
+			#{cdjfrmzsnkyf},
+			#{ptwkzswkyf},
+			#{gkzswkyf},
+			#{fckzsfckyf},
+			#{jcsfckyf},
+			#{ekzs},
+			#{zykzszykyf},
+			#{zyzlszykyf},
+			#{kqkzskqkyf},
+			#{kqzlskqkyf},
+			#{jgskqkyf},
+			#{ykzs},
+			#{ebhkzs},
+			#{pfkzs},
+			#{grxjbkzsgrxjbkyf},
+			#{glsgrxjbkyf},
+			#{kfkzskfkyf},
+			#{xyllskfkyf},
+			#{ydzlskfkyf},
+			#{yyzlskfkyf},
+			#{hszsyyf},
+			#{zlzbssyyf},
+			#{zsssyyf},
+			#{syssyyf},
+			#{zsgcssyyf},
+			#{jzkzsjzkyf},
+			#{qjsjzkyf},
+			#{lgsjzkyf},
+			#{yszbsjzkyf},
+			#{qtqzm},
+			#{doc_id}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ironfo_five_mjzyf_kjlx SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			mjzyfid = #{mjzyfId},
+			ghsfs = #{ghsfs},
+			fwzx = #{ghsfs},
+			fzt = #{fzt},
+			hzq = #{hzq},
+			qkylkzs = #{qkylkzs},
+			ptnkzsnkyf = #{ptnkzsnkyf},
+			cdjfrmzsnkyf = #{cdjfrmzsnkyf},
+			ptwkzswkyf = #{ptwkzswkyf},
+			gkzswkyf = #{gkzswkyf},
+			fckzsfckyf = #{fckzsfckyf},
+			jcsfckyf = #{jcsfckyf},
+			ekzs = #{ekzs},
+			zykzszykyf = #{zykzszykyf},
+			zyzlszykyf = #{zyzlszykyf},
+			kqkzskqkyf = #{kqkzskqkyf},
+			kqzlskqkyf = #{kqzlskqkyf},
+			jgskqkyf = #{jgskqkyf},
+			ykzs = #{ykzs},
+			ebhkzs = #{ebhkzs},
+			pfkzs = #{pfkzs},
+			grxjbkzsgrxjbkyf = #{grxjbkzsgrxjbkyf},
+			glsgrxjbkyf = #{glsgrxjbkyf},
+			kfkzskfkyf = #{kfkzskfkyf},
+			xyllskfkyf = #{xyllskfkyf},
+			ydzlskfkyf = #{ydzlskfkyf},
+			yyzlskfkyf = #{yyzlskfkyf},
+			hszsyyf = #{hszsyyf},
+			zlzbssyyf = #{zlzbssyyf},
+			zsssyyf = #{zsssyyf},
+			syssyyf = #{syssyyf},
+			zsgcssyyf = #{zsgcssyyf},
+			jzkzsjzkyf = #{jzkzsjzkyf},
+			qjsjzkyf = #{qjsjzkyf},
+			lgsjzkyf = #{lgsjzkyf},
+			yszbsjzkyf = #{yszbsjzkyf},
+			qtqzm = #{qtqzm},
+			doc_id = #{doc_id}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM ironfo_five_mjzyf_kjlx
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE ironfo_five_mjzyf_kjlx SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="Ironfofivemjzyfkjlx" statementType="STATEMENT">
+		select * FROM ironfo_five_mjzyf_kjlx  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>

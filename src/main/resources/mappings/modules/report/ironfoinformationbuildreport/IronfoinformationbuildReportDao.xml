@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.report.ironfoinformationbuildreport.dao.IronfoinformationbuildReportDao">
+    
+	<sql id="ironfoinformationbuildColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.doc_id AS "doc_id",
+		a.rjmc AS "rjmc",
+		a.csmc AS "csmc",
+		a.rjzj AS "rjzj",
+		a.trsysj AS "trsysj",
+		a.xtbsfs AS "xtbsfs",
+		a.xtgnsx AS "xtgnsx"
+	</sql>
+	
+	<sql id="ironfoinformationbuildJoins">
+	</sql>
+	
+    
+	<select id="get" resultType="Ironfoinformationbuild" >
+		SELECT 
+			<include refid="ironfoinformationbuildColumns"/>
+		FROM ironfo_information_build a
+		<include refid="ironfoinformationbuildJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Ironfoinformationbuild" >
+		SELECT 
+			<include refid="ironfoinformationbuildColumns"/>
+		FROM ironfo_information_build a
+		<include refid="ironfoinformationbuildJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="doc_id != null and doc_id != '' ">
+    		AND a.doc_id = #{doc_id}
+		 	</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Ironfoinformationbuild" >
+		SELECT 
+			<include refid="ironfoinformationbuildColumns"/>
+		FROM ironfo_information_build a
+		<include refid="ironfoinformationbuildJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ironfo_information_build(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			doc_id,
+			build_rjmc,
+			build_csmc,
+			build_rjzj,
+			build_trsysj,
+			build_xtbsfs,
+			build_xtgnsx
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{doc_id},
+			#{build_rjmc},
+			#{build_csmc},
+			#{build_rjzj},
+			#{build_trsysj},
+			#{build_xtbsfs},
+			#{build_xtgnsx}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ironfo_information_build SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			doc_id = #{doc_id},
+			build_rjmc = #{build_rjmc},
+			build_csmc = #{build_csmc},
+			build_rjzj = #{build_rjzj},
+			build_trsysj = #{build_trsysj},
+			build_xtbsfs = #{build_xtbsfs},
+			build_xtgnsx = #{build_xtgnsx}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM ironfo_information_build
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE ironfo_information_build SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="Ironfoinformationbuild" statementType="STATEMENT">
+		select * FROM ironfo_information_build  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>

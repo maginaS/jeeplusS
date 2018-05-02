@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.ironfoyjbylsbpzfskcskxdtk.dao.IronfoyjbylsbpzfskcskxdtkDao">
+    
+	<sql id="ironfoyjbylsbpzfskcskxdtkColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.doc_id AS "doc_id",
+		a.fskcskxdtk_sbmc AS "fskcskxdtk_sbmc",
+		a.fskcskxdtk_pp AS "fskcskxdtk_pp",
+		a.fskcskxdtk_xh AS "fskcskxdtk_xh",
+		a.fskcskxdtk_sl AS "fskcskxdtk_sl",
+		a.fskcskxdtk_sbjg AS "fskcskxdtk_sbjg",
+		a.fskcskxdtk_trsynf AS "fskcskxdtk_trsynf"
+	</sql>
+	
+	<sql id="ironfoyjbylsbpzfskcskxdtkJoins">
+	</sql>
+	
+    
+	<select id="get" resultType="Ironfoyjbylsbpzfskcskxdtk" >
+		SELECT 
+			<include refid="ironfoyjbylsbpzfskcskxdtkColumns"/>
+		FROM ironfo_yjbylsbpz_fskcskxdtk a
+		<include refid="ironfoyjbylsbpzfskcskxdtkJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="queryForList" resultType="Ironfoyjbylsbpzfskcskxdtk" >
+		SELECT 
+			
+			a.id AS "id",
+			a.create_by AS "createBy.id",
+			a.create_date AS "createDate",
+			a.update_by AS "updateBy.id",
+			a.update_date AS "updateDate",
+			a.remarks AS "remarks",
+			a.del_flag AS "delFlag",
+			a.doc_id AS "doc_id",
+			a.sbmc AS "sbmc",
+			a.pp AS "pp",
+			a.xh AS "xh",
+			a.sl AS "sl",
+			a.sbjg AS "sbjg",
+			a.trsynf AS "trsynf"
+			
+			
+		FROM ironfo_yjbylsbpz_fskcskxdtk a
+		
+		<where>
+			a.doc_id = #{doc_id}
+		</where>
+		<!-- <choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose> -->
+	</select>
+	
+	<select id="findAllList" resultType="Ironfoyjbylsbpzfskcskxdtk" >
+		SELECT 
+			<include refid="ironfoyjbylsbpzfskcskxdtkColumns"/>
+		FROM ironfo_yjbylsbpz_fskcskxdtk a
+		<include refid="ironfoyjbylsbpzfskcskxdtkJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ironfo_yjbylsbpz_fskcskxdtk(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			doc_id,
+			sbmc,
+			pp,
+			xh,
+			sl,
+			sbjg,
+			trsynf
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{doc_id},
+			#{sbmc},
+			#{pp},
+			#{xh},
+			#{sl},
+			#{sbjg},
+			#{trsynf}
+		)
+	</insert>
+	
+	<update id="updateIronfo">
+		UPDATE ironfo_yjbylsbpz_fskcskxdtk SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			doc_id = #{doc_id},
+			sbmc = #{sbmc},
+			pp = #{pp},
+			xh = #{xh},
+			sl = #{sl},
+			sbjg = #{sbjg},
+			trsynf = #{trsynf}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM ironfo_yjbylsbpz_fskcskxdtk
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE ironfo_yjbylsbpz_fskcskxdtk SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="Ironfoyjbylsbpzfskcskxdtk" statementType="STATEMENT">
+		select * FROM ironfo_yjbylsbpz_fskcskxdtk  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>

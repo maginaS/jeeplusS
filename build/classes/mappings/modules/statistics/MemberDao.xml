@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.statistics.dao.MemberDao">
+    
+	<sql id="memberColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.name AS "name",
+		a.phone AS "phone",
+		a.pwd AS "pwd",
+		a.gender AS "gender",
+		a.head AS "head",
+		a.real_name AS "real_name",
+		a.level_id AS "level_id",
+		a.name_id AS "name_ID",
+		a.status AS "status"
+	</sql>
+	
+	<sql id="memberJoins">
+	</sql>
+	
+    
+	<select id="get" resultType="Member" >
+		SELECT 
+			<include refid="memberColumns"/>
+		FROM member a
+		<include refid="memberJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Member" >
+		SELECT 
+			<include refid="memberColumns"/>
+		FROM member a
+		<include refid="memberJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Member" >
+		SELECT 
+			<include refid="memberColumns"/>
+		FROM member a
+		<include refid="memberJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO member(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			name,
+			phone,
+			pwd,
+			gender,
+			head,
+			real_name,
+			level_id,
+			name_id,
+			status
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{name},
+			#{phone},
+			#{pwd},
+			#{gender},
+			#{head},
+			#{real_name},
+			#{level_id},
+			#{name_ID},
+			#{status}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE member SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			name = #{name},
+			phone = #{phone},
+			pwd = #{pwd},
+			gender = #{gender},
+			head = #{head},
+			real_name = #{real_name},
+			level_id = #{level_id},
+			name_id = #{name_ID},
+			status = #{status}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM member
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE member SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="Member" statementType="STATEMENT">
+		select * FROM member  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.ironfodoctitle.dao.IronfoDocTitleDao">
+    
+	<sql id="ironfoDocTitleColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.title_name AS "title_name"
+	</sql>
+	
+	<sql id="ironfoDocTitleJoins">
+	</sql>
+	
+    
+	<select id="get" resultType="IronfoDocTitle" >
+		SELECT 
+			<include refid="ironfoDocTitleColumns"/>
+		FROM ironfo_doc_title a
+		<include refid="ironfoDocTitleJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	
+	<select id="getDocId" resultType="IronfoDocTitle" >
+		SELECT 
+			a.id AS "id",
+			a.create_by AS "createBy.id",
+			a.create_date AS "createDate",
+			a.update_by AS "updateBy.id",
+			a.update_date AS "updateDate",
+			a.remarks AS "remarks",
+			a.del_flag AS "delFlag",
+			a.title_name AS "title_name"
+			
+		FROM ironfo_doc_title a
+		
+		
+		WHERE a.remarks = #{remarks}
+	</select>
+	
+	
+	<select id="queryforList" resultType="IronfoDocTitle" >
+		SELECT 
+			<include refid="ironfoDocTitleColumns"/>
+		FROM ironfo_doc_title a
+		<include refid="ironfoDocTitleJoins"/>
+		<where>
+			a.remarks = #{remarks}
+		</where>
+	</select>
+	
+	
+	
+	<select id="findList" resultType="IronfoDocTitle" >
+		SELECT 
+			<include refid="ironfoDocTitleColumns"/>
+		FROM ironfo_doc_title a
+		<include refid="ironfoDocTitleJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		
+	</select>
+	
+	
+	
+	<select id="findAllList" resultType="IronfoDocTitle" >
+		SELECT 
+			<include refid="ironfoDocTitleColumns"/>
+		FROM ironfo_doc_title a
+		<include refid="ironfoDocTitleJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ironfo_doc_title(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			title_name
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{title_name}
+		)
+	</insert>
+	
+	
+	 <insert id="insertid" useGeneratedKeys="true" keyProperty="id" parameterType="com.jeeplus.modules.ironfodoctitle.entity.IronfoDocTitle">
+	
+		INSERT INTO ironfo_doc_title(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			title_name
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{title_name}
+		)
+	</insert> 
+	
+	
+	<update id="update">
+		UPDATE ironfo_doc_title SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			title_name = #{title_name}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM ironfo_doc_title
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE ironfo_doc_title SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="IronfoDocTitle" statementType="STATEMENT">
+		select * FROM ironfo_doc_title  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.report.ironfopublichealthreport.dao.IronfopublichealthReportDao">
+    
+	<sql id="ironfopublichealthColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.nmfwczrks AS "nmfwczrks",
+		a.qzldlsets AS "qzldlsets",
+		a.qzldssets AS "qzldssets",
+		a.qzlswsysrks AS "qzlswsysrks",
+		a.nmjmjkdaljjdrs AS "nmjmjkdaljjdrs",
+		a.qzgfhdzdars AS "qzgfhdzdars",
+		a.nnjsjkjyrcs AS "nnjsjkjyrcs",
+		a.nnldlsetyfjzrcs AS "nnldlsetyfjzrcs",
+		a.nmldlsetjkglrs AS "nmldlsetjkglrs",
+		a.nmycfjkglrs AS "nmycfjkglrs",
+		a.nmlswsyslrjkglr AS "nmlswsyslrjkglr",
+		a.nmgxygfglrs AS "nmgxygfglrs",
+		a.nmtnbgfglrs AS "nmtnbgfglrs",
+		a.nmzxjszahzglrs AS "nmzxjszahzglrs",
+		a.nmfjhhzglrs AS "nmfjhhzglrs",
+		a.nncrbhtfggwssjbgls AS "nncrbhtfggwssjbgls",
+		a.nnwsjdxgxxbgls AS "nnwsjdxgxxbgls",
+		a.nmldssetzyyjkglrs AS "nmldssetzyyjkglrs",
+		a.nmlswyslrzyyjkglrs AS "nmlswyslrzyyjkglrs",
+		a.date AS "date",
+		a.doc_id AS "doc_id"
+	</sql>
+	
+	<sql id="ironfopublichealthJoins">
+	</sql>
+	
+    
+	<select id="get" resultType="Ironfopublichealth" >
+		SELECT 
+			<include refid="ironfopublichealthColumns"/>
+		FROM ironfo_public_health a
+		<include refid="ironfopublichealthJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Ironfopublichealth" >
+		SELECT 
+			<include refid="ironfopublichealthColumns"/>
+		FROM ironfo_public_health a
+		<include refid="ironfopublichealthJoins"/>
+		<where>
+			<if test="doc_id != null and doc_id != '' ">
+    				a.doc_id = #{doc_id}
+				 </if>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	
+	
+	<select id="queryForList" resultType="Ironfopublichealth" >
+		SELECT 
+			a.id AS "id",
+			a.create_by AS "createBy.id",
+			a.create_date AS "createDate",
+			a.update_by AS "updateBy.id",
+			a.update_date AS "updateDate",
+			a.remarks AS "remarks",
+			a.del_flag AS "delFlag",
+			a.nmfwczrks AS "nmfwczrks",
+			a.qzldlsets AS "qzldlsets",
+			a.qzldssets AS "qzldssets",
+			a.qzlswsysrks AS "qzlswsysrks",
+			a.nmjmjkdaljjdrs AS "nmjmjkdaljjdrs",
+			a.qzgfhdzdars AS "qzgfhdzdars",
+			a.nnjsjkjyrcs AS "nnjsjkjyrcs",
+			a.nnldlsetyfjzrcs AS "nnldlsetyfjzrcs",
+			a.nmldlsetjkglrs AS "nmldlsetjkglrs",
+			a.nmycfjkglrs AS "nmycfjkglrs",
+			a.nmlswsyslrjkglr AS "nmlswsyslrjkglr",
+			a.nmgxygfglrs AS "nmgxygfglrs",
+			a.nmtnbgfglrs AS "nmtnbgfglrs",
+			a.nmzxjszahzglrs AS "nmzxjszahzglrs",
+			a.nmfjhhzglrs AS "nmfjhhzglrs",
+			a.nncrbhtfggwssjbgls AS "nncrbhtfggwssjbgls",
+			a.nnwsjdxgxxbgls AS "nnwsjdxgxxbgls",
+			a.nmldssetzyyjkglrs AS "nmldssetzyyjkglrs",
+			a.nmlswyslrzyyjkglrs AS "nmlswyslrzyyjkglrs",
+			a.date AS "date",
+			a.doc_id AS "doc_id"
+		FROM ironfo_public_health a
+		<!-- <include refid="ironfopublichealthJoins"/> -->
+		<where>
+			a.doc_id = #{doc_id}
+		</where>
+		
+	</select>
+	
+	
+	
+	<select id="findAllList" resultType="Ironfopublichealth" >
+		SELECT 
+			<include refid="ironfopublichealthColumns"/>
+		FROM ironfo_public_health a
+		<include refid="ironfopublichealthJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ironfo_public_health(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			nmfwczrks,
+			qzldlsets,
+			qzldssets,
+			qzlswsysrks,
+			nmjmjkdaljjdrs,
+			qzgfhdzdars,
+			nnjsjkjyrcs,
+			nnldlsetyfjzrcs,
+			nmldlsetjkglrs,
+			nmycfjkglrs,
+			nmlswsyslrjkglr,
+			nmgxygfglrs,
+			nmtnbgfglrs,
+			nmzxjszahzglrs,
+			nmfjhhzglrs,
+			nncrbhtfggwssjbgls,
+			nnwsjdxgxxbgls,
+			nmldssetzyyjkglrs,
+			nmlswyslrzyyjkglrs,
+			date,
+			doc_id
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{nmfwczrks},
+			#{qzldlsets},
+			#{qzldssets},
+			#{qzlswsysrks},
+			#{nmjmjkdaljjdrs},
+			#{qzgfhdzdars},
+			#{nnjsjkjyrcs},
+			#{nnldlsetyfjzrcs},
+			#{nmldlsetjkglrs},
+			#{nmycfjkglrs},
+			#{nmlswsyslrjkglr},
+			#{nmgxygfglrs},
+			#{nmtnbgfglrs},
+			#{nmzxjszahzglrs},
+			#{nmfjhhzglrs},
+			#{nncrbhtfggwssjbgls},
+			#{nnwsjdxgxxbgls},
+			#{nmldssetzyyjkglrs},
+			#{nmlswyslrzyyjkglrs},
+			#{date},
+			#{doc_id}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ironfo_public_health SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			nmfwczrks = #{nmfwczrks},
+			qzldlsets = #{qzldlsets},
+			qzldssets = #{qzldssets},
+			qzlswsysrks = #{qzlswsysrks},
+			nmjmjkdaljjdrs = #{nmjmjkdaljjdrs},
+			qzgfhdzdars = #{qzgfhdzdars},
+			nnjsjkjyrcs = #{nnjsjkjyrcs},
+			nnldlsetyfjzrcs = #{nnldlsetyfjzrcs},
+			nmldlsetjkglrs = #{nmldlsetjkglrs},
+			nmycfjkglrs = #{nmycfjkglrs},
+			nmlswsyslrjkglr = #{nmlswsyslrjkglr},
+			nmgxygfglrs = #{nmgxygfglrs},
+			nmtnbgfglrs = #{nmtnbgfglrs},
+			nmzxjszahzglrs = #{nmzxjszahzglrs},
+			nmfjhhzglrs = #{nmfjhhzglrs},
+			nncrbhtfggwssjbgls = #{nncrbhtfggwssjbgls},
+			nnwsjdxgxxbgls = #{nnwsjdxgxxbgls},
+			nmldssetzyyjkglrs = #{nmldssetzyyjkglrs},
+			nmlswyslrzyyjkglrs = #{nmlswyslrzyyjkglrs},
+			date = #{date},
+			doc_id = #{doc_id}
+		WHERE id = #{id}
+	</update>
+	
+	
+	
+	
+	<update id="updateIronfo">
+		UPDATE ironfo_public_health SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			nmfwczrks = #{nmfwczrks},
+			qzldlsets = #{qzldlsets},
+			qzldssets = #{qzldssets},
+			qzlswsysrks = #{qzlswsysrks},
+			nmjmjkdaljjdrs = #{nmjmjkdaljjdrs},
+			qzgfhdzdars = #{qzgfhdzdars},
+			nnjsjkjyrcs = #{nnjsjkjyrcs},
+			nnldlsetyfjzrcs = #{nnldlsetyfjzrcs},
+			nmldlsetjkglrs = #{nmldlsetjkglrs},
+			nmycfjkglrs = #{nmycfjkglrs},
+			nmlswsyslrjkglr = #{nmlswsyslrjkglr},
+			nmgxygfglrs = #{nmgxygfglrs},
+			nmtnbgfglrs = #{nmtnbgfglrs},
+			nmzxjszahzglrs = #{nmzxjszahzglrs},
+			nmfjhhzglrs = #{nmfjhhzglrs},
+			nncrbhtfggwssjbgls = #{nncrbhtfggwssjbgls},
+			nnwsjdxgxxbgls = #{nnwsjdxgxxbgls},
+			nmldssetzyyjkglrs = #{nmldssetzyyjkglrs},
+			nmlswyslrzyyjkglrs = #{nmlswyslrzyyjkglrs}
+			
+		WHERE id = #{id}
+	</update>
+	
+	
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM ironfo_public_health
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE ironfo_public_health SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="Ironfopublichealth" statementType="STATEMENT">
+		select * FROM ironfo_public_health  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>

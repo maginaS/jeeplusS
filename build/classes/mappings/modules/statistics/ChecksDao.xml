@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.statistics.dao.ChecksDao">
+    
+	<sql id="checksColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.num AS "num",
+		a.status AS "status",
+		a.type AS "type",
+		a.order_date AS "order_date",
+		a.send_date AS "send_date",
+		a.accept_date AS "accept_date",
+		a.receiving_date AS "receiving_date",
+		a.total_amount AS "total_amount",
+		a.discount_amount AS "discount_amount",
+		a.coupon_amount AS "coupon_amount",
+		a.integral_amount AS "integral_amount",
+		a.freight_amount AS "freight_amount",
+		a.com_amount AS "com_amount",
+		a.pay_code AS "pay_code",
+		a.delivery_id AS "delivery_id",
+		a.consignee AS "consignee",
+		a.phone AS "phone",
+		a.country_id AS "country_id",
+		a.country_name AS "country_name",
+		a.state_id AS "state_id",
+		a.state_name AS "state_name",
+		a.city_id AS "city_id",
+		a.city_name AS "city_name",
+		a.area_id AS "area_id",
+		a.area_name AS "area_name",
+		a.address_id AS "address_id",
+		a.address_name AS "address_name",
+		a.invoice_type AS "invoice_type",
+		a.invoice_company AS "invoice_company",
+		a.invoice_ein AS "invoice_ein",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="checksJoins">
+	</sql>
+	
+    
+	<select id="get" resultType="Checks" >
+		SELECT 
+			<include refid="checksColumns"/>
+		FROM checks a
+		<include refid="checksJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Checks" >
+		SELECT 
+			<include refid="checksColumns"/>
+		FROM checks a
+		<include refid="checksJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Checks" >
+		SELECT 
+			<include refid="checksColumns"/>
+		FROM checks a
+		<include refid="checksJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO checks(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			num,
+			status,
+			type,
+			order_date,
+			send_date,
+			accept_date,
+			receiving_date,
+			total_amount,
+			discount_amount,
+			coupon_amount,
+			integral_amount,
+			freight_amount,
+			com_amount,
+			pay_code,
+			delivery_id,
+			consignee,
+			phone,
+			country_id,
+			country_name,
+			state_id,
+			state_name,
+			city_id,
+			city_name,
+			area_id,
+			area_name,
+			address_id,
+			address_name,
+			invoice_type,
+			invoice_company,
+			invoice_ein,
+			remark
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{num},
+			#{status},
+			#{type},
+			#{order_date},
+			#{send_date},
+			#{accept_date},
+			#{receiving_date},
+			#{total_amount},
+			#{discount_amount},
+			#{coupon_amount},
+			#{integral_amount},
+			#{freight_amount},
+			#{com_amount},
+			#{pay_code},
+			#{delivery_id},
+			#{consignee},
+			#{phone},
+			#{country_id},
+			#{country_name},
+			#{state_id},
+			#{state_name},
+			#{city_id},
+			#{city_name},
+			#{area_id},
+			#{area_name},
+			#{address_id},
+			#{address_name},
+			#{invoice_type},
+			#{invoice_company},
+			#{invoice_ein},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE checks SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			num = #{num},
+			status = #{status},
+			type = #{type},
+			order_date = #{order_date},
+			send_date = #{send_date},
+			accept_date = #{accept_date},
+			receiving_date = #{receiving_date},
+			total_amount = #{total_amount},
+			discount_amount = #{discount_amount},
+			coupon_amount = #{coupon_amount},
+			integral_amount = #{integral_amount},
+			freight_amount = #{freight_amount},
+			com_amount = #{com_amount},
+			pay_code = #{pay_code},
+			delivery_id = #{delivery_id},
+			consignee = #{consignee},
+			phone = #{phone},
+			country_id = #{country_id},
+			country_name = #{country_name},
+			state_id = #{state_id},
+			state_name = #{state_name},
+			city_id = #{city_id},
+			city_name = #{city_name},
+			area_id = #{area_id},
+			area_name = #{area_name},
+			address_id = #{address_id},
+			address_name = #{address_name},
+			invoice_type = #{invoice_type},
+			invoice_company = #{invoice_company},
+			invoice_ein = #{invoice_ein},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM checks
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE checks SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="Checks" statementType="STATEMENT">
+		select * FROM checks  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>

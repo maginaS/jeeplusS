@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.ironfobzyebhkqkpfkgrxjbk.dao.IronfobzyebhkqkpfkgrxjbkDao">
+    
+	<sql id="ironfobzyebhkqkpfkgrxjbkColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.doc_id AS "doc_id",
+		a.yebhjbbz AS "yebhjbbz",
+		a.yebhtjbz AS "yebhtjbz",
+		a.yebhtext AS "yebhtext",
+		a.kqkjbbz AS "kqkjbbz",
+		a.kqktjbz AS "kqktjbz",
+		a.kqktext AS "kqktext",
+		a.pfkjbbz AS "pfkjbbz",
+		a.pfktjbz AS "pfktjbz",
+		a.pfktext AS "pfktext",
+		a.grxjbkjbbz AS "grxjbkjbbz",
+		a.grxjbktjbz AS "grxjbktjbz",
+		a.grxjbktext AS "grxjbktext",
+		a.grxjbktjbztext AS "grxjbktjbztext",
+		a.yebhtjbztext AS "yebhtjbztext",
+		a.kqktjbztext AS "kqktjbztext",
+		a.pfktjbztext AS "pfktjbztext"
+	</sql>
+	
+	<sql id="ironfobzyebhkqkpfkgrxjbkJoins">
+	</sql>
+	
+	
+	<select id="queryForList" resultType="Ironfobzyebhkqkpfkgrxjbk" >
+		SELECT 
+			
+			a.id AS "id",
+			a.create_by AS "createBy.id",
+			a.create_date AS "createDate",
+			a.update_by AS "updateBy.id",
+			a.update_date AS "updateDate",
+			a.remarks AS "remarks",
+			a.del_flag AS "delFlag",
+			a.doc_id AS "doc_id",
+			a.yebhjbbz AS "yebhjbbz",
+			a.yebhtjbz AS "yebhtjbz",
+			a.yebhtext AS "yebhtext",
+			a.kqkjbbz AS "kqkjbbz",
+			a.kqktjbz AS "kqktjbz",
+			a.kqktext AS "kqktext",
+			a.pfkjbbz AS "pfkjbbz",
+			a.pfktjbz AS "pfktjbz",
+			a.pfktext AS "pfktext",
+			a.grxjbkjbbz AS "grxjbkjbbz",
+			a.grxjbktjbz AS "grxjbktjbz",
+			a.grxjbktext AS "grxjbktext",
+			a.grxjbktjbztext AS "grxjbktjbztext",
+			a.yebhtjbztext AS "yebhtjbztext",
+			a.kqktjbztext AS "kqktjbztext",
+			a.pfktjbztext AS "pfktjbztext"
+		FROM ironfo_bz_yebh_kqk_pfk_grxjbk a
+		
+		<where>
+			a.doc_id = #{doc_id}
+		</where>
+		
+	</select>
+	
+    
+	<select id="get" resultType="Ironfobzyebhkqkpfkgrxjbk" >
+		SELECT 
+			<include refid="ironfobzyebhkqkpfkgrxjbkColumns"/>
+		FROM ironfo_bz_yebh_kqk_pfk_grxjbk a
+		<include refid="ironfobzyebhkqkpfkgrxjbkJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Ironfobzyebhkqkpfkgrxjbk" >
+		SELECT 
+			<include refid="ironfobzyebhkqkpfkgrxjbkColumns"/>
+		FROM ironfo_bz_yebh_kqk_pfk_grxjbk a
+		<include refid="ironfobzyebhkqkpfkgrxjbkJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Ironfobzyebhkqkpfkgrxjbk" >
+		SELECT 
+			<include refid="ironfobzyebhkqkpfkgrxjbkColumns"/>
+		FROM ironfo_bz_yebh_kqk_pfk_grxjbk a
+		<include refid="ironfobzyebhkqkpfkgrxjbkJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ironfo_bz_yebh_kqk_pfk_grxjbk(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			doc_id,
+			yebhjbbz,
+			yebhtjbz,
+			yebhtext,
+			kqkjbbz,
+			kqktjbz,
+			kqktext,
+			pfkjbbz,
+			pfktjbz,
+			pfktext,
+			grxjbkjbbz,
+			grxjbktjbz,
+			grxjbktext,
+			grxjbktjbztext,
+			yebhtjbztext,
+			kqktjbztext,
+			pfktjbztext
+			 
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{doc_id},
+			#{yebhjbbz},
+			#{yebhtjbz},
+			#{yebhtext},
+			#{kqkjbbz},
+			#{kqktjbz},
+			#{kqktext},
+			#{pfkjbbz},
+			#{pfktjbz},
+			#{pfktext},
+			#{grxjbkjbbz},
+			#{grxjbktjbz},
+			#{grxjbktext},
+			#{grxjbktjbztext},
+			#{yebhtjbztext},
+			#{kqktjbztext},
+			#{pfktjbztext}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ironfo_bz_yebh_kqk_pfk_grxjbk SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			doc_id = #{doc_id},
+			yebhjbbz = #{yebhjbbz},
+			yebhtjbz = #{yebhtjbz},
+			yebhtext = #{yebhtext},
+			kqkjbbz = #{kqkjbbz},
+			kqktjbz = #{kqktjbz},
+			kqktext = #{kqktext},
+			pfkjbbz = #{pfkjbbz},
+			pfktjbz = #{pfktjbz},
+			pfktext = #{pfktext},
+			grxjbkjbbz = #{grxjbkjbbz},
+			grxjbktjbz = #{grxjbktjbz},
+			grxjbktext = #{grxjbktext},
+			grxjbktjbztext = #{grxjbktjbztext},
+			yebhtjbztext = #{yebhtjbztext},
+			kqktjbztext = #{kqktjbztext},
+			pfktjbztext = #{pfktjbztext}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<update id="updateIronfo">
+		UPDATE ironfo_bz_yebh_kqk_pfk_grxjbk SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			doc_id = #{doc_id},
+			yebhjbbz = #{yebhjbbz},
+			yebhtjbz = #{yebhtjbz},
+			yebhtext = #{yebhtext},
+			kqkjbbz = #{kqkjbbz},
+			kqktjbz = #{kqktjbz},
+			kqktext = #{kqktext},
+			pfkjbbz = #{pfkjbbz},
+			pfktjbz = #{pfktjbz},
+			pfktext = #{pfktext},
+			grxjbkjbbz = #{grxjbkjbbz},
+			grxjbktjbz = #{grxjbktjbz},
+			grxjbktext = #{grxjbktext},
+			grxjbktjbztext = #{grxjbktjbztext},
+			yebhtjbztext = #{yebhtjbztext},
+			kqktjbztext = #{kqktjbztext},
+			pfktjbztext = #{pfktjbztext}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM ironfo_bz_yebh_kqk_pfk_grxjbk
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE ironfo_bz_yebh_kqk_pfk_grxjbk SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="Ironfobzyebhkqkpfkgrxjbk" statementType="STATEMENT">
+		select * FROM ironfo_bz_yebh_kqk_pfk_grxjbk  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>

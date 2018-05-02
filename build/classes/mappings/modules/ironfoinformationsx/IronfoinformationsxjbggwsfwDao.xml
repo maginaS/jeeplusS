@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.ironfoinformationsx.dao.IronfoinformationsxjbggwsfwDao">
+    
+	<sql id="ironfoinformationsxjbggwsfwColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.doc_id AS "doc_id",
+		a.se_id AS "se_id",
+		a.jkjyfw AS "jkjyfw",
+		a.yfjzfw AS "yfjzfw",
+		a.etjkglfw AS "etjkglfw",
+		a.ycfjkglfw AS "ycfjkglfw",
+		a.lnrjkglfw AS "lnrjkglfw",
+		a.gxyhzjkglfw AS "gxyhzjkglfw",
+		a.extnbhzjkglfw AS "extnbhzjkglfw",
+		a.yzjszahzjkglfw AS "yzjszahzjkglfw",
+		a.fjhhzjkglfw AS "fjhhzjkglfw",
+		a.lnrzyyjkglfw AS "lnrzyyjkglfw",
+		a.etzyyjkglfw AS "etzyyjkglfw",
+		a.crbjtfggwssjglfw AS "crbjtfggwssjglfw",
+		a.wsjsjdxgfw AS "wsjsjdxgfw",
+		a.jhsyjsfw AS "jhsyjsfw",
+		a.mxbjcfw AS "mxbjcfw"
+	</sql>
+	
+	<sql id="ironfoinformationsxjbggwsfwJoins">
+	</sql>
+	
+    
+	<select id="get" resultType="Ironfoinformationsxjbggwsfw" >
+		SELECT 
+			<include refid="ironfoinformationsxjbggwsfwColumns"/>
+		FROM ironfo_information_sx_jbggwsfw a
+		<include refid="ironfoinformationsxjbggwsfwJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="queryForList" resultType="Ironfoinformationsxjbggwsfw" >
+		SELECT 
+			a.id AS "id",
+			a.create_by AS "createBy.id",
+			a.create_date AS "createDate",
+			a.update_by AS "updateBy.id",
+			a.update_date AS "updateDate",
+			a.remarks AS "remarks",
+			a.del_flag AS "delFlag",
+			a.doc_id AS "doc_id",
+			a.se_id AS "se_id",
+			a.jkjyfw AS "jkjyfw",
+			a.yfjzfw AS "yfjzfw",
+			a.etjkglfw AS "etjkglfw",
+			a.ycfjkglfw AS "ycfjkglfw",
+			a.lnrjkglfw AS "lnrjkglfw",
+			a.gxyhzjkglfw AS "gxyhzjkglfw",
+			a.extnbhzjkglfw AS "extnbhzjkglfw",
+			a.yzjszahzjkglfw AS "yzjszahzjkglfw",
+			a.fjhhzjkglfw AS "fjhhzjkglfw",
+			a.lnrzyyjkglfw AS "lnrzyyjkglfw",
+			a.etzyyjkglfw AS "etzyyjkglfw",
+			a.crbjtfggwssjglfw AS "crbjtfggwssjglfw",
+			a.wsjsjdxgfw AS "wsjsjdxgfw",
+			a.jhsyjsfw AS "jhsyjsfw",
+			a.mxbjcfw AS "mxbjcfw"
+		FROM ironfo_information_sx_jbggwsfw a
+	
+		<where>
+			a.doc_id = #{doc_id}
+		</where>
+		
+	</select>
+	
+	
+	<select id="findList" resultType="Ironfoinformationsxjbggwsfw" >
+		SELECT 
+			<include refid="ironfoinformationsxjbggwsfwColumns"/>
+		FROM ironfo_information_sx_jbggwsfw a
+		<include refid="ironfoinformationsxjbggwsfwJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Ironfoinformationsxjbggwsfw" >
+		SELECT 
+			<include refid="ironfoinformationsxjbggwsfwColumns"/>
+		FROM ironfo_information_sx_jbggwsfw a
+		<include refid="ironfoinformationsxjbggwsfwJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ironfo_information_sx_jbggwsfw(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			doc_id,
+			se_id,
+			jkjyfw,
+			yfjzfw,
+			etjkglfw,
+			ycfjkglfw,
+			lnrjkglfw,
+			gxyhzjkglfw,
+			extnbhzjkglfw,
+			yzjszahzjkglfw,
+			fjhhzjkglfw,
+			lnrzyyjkglfw,
+			etzyyjkglfw,
+			crbjtfggwssjglfw,
+			wsjsjdxgfw,
+			jhsyjsfw,
+			mxbjcfw
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{doc_id},
+			#{se_id},
+			#{jkjyfw},
+			#{yfjzfw},
+			#{etjkglfw},
+			#{ycfjkglfw},
+			#{lnrjkglfw},
+			#{gxyhzjkglfw},
+			#{extnbhzjkglfw},
+			#{yzjszahzjkglfw},
+			#{fjhhzjkglfw},
+			#{lnrzyyjkglfw},
+			#{etzyyjkglfw},
+			#{crbjtfggwssjglfw},
+			#{wsjsjdxgfw},
+			#{jhsyjsfw},
+			#{mxbjcfw}
+		)
+	</insert>
+	
+	
+	<insert id="savesxjbggwsfw">
+		INSERT INTO ironfo_information_sx_jbggwsfw(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			doc_id,
+			se_id,
+			jkjyfw,
+			yfjzfw,
+			etjkglfw,
+			ycfjkglfw,
+			lnrjkglfw,
+			gxyhzjkglfw,
+			extnbhzjkglfw,
+			yzjszahzjkglfw,
+			fjhhzjkglfw,
+			lnrzyyjkglfw,
+			etzyyjkglfw,
+			crbjtfggwssjglfw,
+			wsjsjdxgfw,
+			jhsyjsfw,
+			mxbjcfw
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{doc_id},
+			#{se_id},
+			#{jkjyfw},
+			#{yfjzfw},
+			#{etjkglfw},
+			#{ycfjkglfw},
+			#{lnrjkglfw},
+			#{gxyhzjkglfw},
+			#{extnbhzjkglfw},
+			#{yzjszahzjkglfw},
+			#{fjhhzjkglfw},
+			#{lnrzyyjkglfw},
+			#{etzyyjkglfw},
+			#{crbjtfggwssjglfw},
+			#{wsjsjdxgfw},
+			#{jhsyjsfw},
+			#{mxbjcfw}
+		)
+	</insert>
+	
+	
+	<update id="update">
+		UPDATE ironfo_information_sx_jbggwsfw SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			doc_id = #{doc_id},
+			se_id = #{se_id},
+			jkjyfw = #{jkjyfw},
+			yfjzfw = #{yfjzfw},
+			etjkglfw = #{etjkglfw},
+			ycfjkglfw = #{ycfjkglfw},
+			lnrjkglfw = #{lnrjkglfw},
+			gxyhzjkglfw = #{gxyhzjkglfw},
+			extnbhzjkglfw = #{extnbhzjkglfw},
+			yzjszahzjkglfw = #{yzjszahzjkglfw},
+			fjhhzjkglfw = #{fjhhzjkglfw},
+			lnrzyyjkglfw = #{lnrzyyjkglfw},
+			etzyyjkglfw = #{etzyyjkglfw},
+			crbjtfggwssjglfw = #{crbjtfggwssjglfw},
+			wsjsjdxgfw = #{wsjsjdxgfw},
+			jhsyjsfw = #{jhsyjsfw},
+			mxbjcfw = #{mxbjcfw}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateIronfo">
+		UPDATE ironfo_information_sx_jbggwsfw SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			doc_id = #{doc_id},
+			se_id = #{se_id},
+			jkjyfw = #{jkjyfw},
+			yfjzfw = #{yfjzfw},
+			etjkglfw = #{etjkglfw},
+			ycfjkglfw = #{ycfjkglfw},
+			lnrjkglfw = #{lnrjkglfw},
+			gxyhzjkglfw = #{gxyhzjkglfw},
+			extnbhzjkglfw = #{extnbhzjkglfw},
+			yzjszahzjkglfw = #{yzjszahzjkglfw},
+			fjhhzjkglfw = #{fjhhzjkglfw},
+			lnrzyyjkglfw = #{lnrzyyjkglfw},
+			etzyyjkglfw = #{etzyyjkglfw},
+			crbjtfggwssjglfw = #{crbjtfggwssjglfw},
+			wsjsjdxgfw = #{wsjsjdxgfw},
+			jhsyjsfw = #{jhsyjsfw},
+			mxbjcfw = #{mxbjcfw}
+		WHERE id = #{id}
+	</update>
+	
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM ironfo_information_sx_jbggwsfw
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE ironfo_information_sx_jbggwsfw SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="Ironfoinformationsxjbggwsfw" statementType="STATEMENT">
+		select * FROM ironfo_information_sx_jbggwsfw  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>

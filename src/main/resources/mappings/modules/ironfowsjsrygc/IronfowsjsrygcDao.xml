@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.ironfowsjsrygc.dao.IronfowsjsrygcDao">
+    
+	<sql id="ironfowsjsrygcColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.doc_id AS "doc_id",
+		a.date AS "date",
+		a.zyys AS "zyys",
+		a.zyysqzggwslb AS "zyysqzggwslb",
+		a.zyzlys AS "zyzlys",
+		a.zyzlysqzggwslb AS "zyzlysqzggwslb",
+		a.zcqkys AS "zcqkys",
+		a.qdqkyspxhgzdrs AS "qdqkyspxhgzdrs",
+		a.zchs AS "zchs",
+		a.zcs AS "zcs",
+		a.yss AS "yss",
+		a.zys AS "zys",
+		a.jyys AS "jyys",
+		a.yxys AS "yxys",
+		a.kfzls AS "kfzls",
+		a.qtwsjsry AS "qtwsjsry"
+	</sql>
+	
+	<sql id="ironfowsjsrygcJoins">
+	</sql>
+	
+    
+	<select id="get" resultType="Ironfowsjsrygc" >
+		SELECT 
+			<include refid="ironfowsjsrygcColumns"/>
+		FROM ironfo_wsjsrygc a
+		<include refid="ironfowsjsrygcJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Ironfowsjsrygc" >
+		SELECT 
+			<include refid="ironfowsjsrygcColumns"/>
+		FROM ironfo_wsjsrygc a
+		<include refid="ironfowsjsrygcJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	
+	<select id="queryForList" resultType="Ironfowsjsrygc" >
+		SELECT 
+			
+			a.id AS "id",
+			a.create_by AS "createBy.id",
+			a.create_date AS "createDate",
+			a.update_by AS "updateBy.id",
+			a.update_date AS "updateDate",
+			a.remarks AS "remarks",
+			a.del_flag AS "delFlag",
+			a.doc_id AS "doc_id",
+			a.date AS "date",
+			a.zyys AS "zyys",
+			a.zyysqzggwslb AS "zyysqzggwslb",
+			a.zyzlys AS "zyzlys",
+			a.zyzlysqzggwslb AS "zyzlysqzggwslb",
+			a.zcqkys AS "zcqkys",
+			a.qdqkyspxhgzdrs AS "qdqkyspxhgzdrs",
+			a.zchs AS "zchs",
+			a.zcs AS "zcs",
+			a.yss AS "yss",
+			a.zys AS "zys",
+			a.jyys AS "jyys",
+			a.yxys AS "yxys",
+			a.kfzls AS "kfzls",
+			a.qtwsjsry AS "qtwsjsry"
+		FROM ironfo_wsjsrygc a
+		
+		<where>
+			a.doc_id = #{doc_id}
+		</where>
+		
+	</select>
+	
+	
+	
+	<select id="findAllList" resultType="Ironfowsjsrygc" >
+		SELECT 
+			<include refid="ironfowsjsrygcColumns"/>
+		FROM ironfo_wsjsrygc a
+		<include refid="ironfowsjsrygcJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ironfo_wsjsrygc(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			doc_id,
+			date,
+			zyys,
+			zyysqzggwslb,
+			zyzlys,
+			zyzlysqzggwslb,
+			zcqkys,
+			qdqkyspxhgzdrs,
+			zchs,
+			zcs,
+			yss,
+			zys,
+			jyys,
+			yxys,
+			kfzls,
+			qtwsjsry
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{doc_id},
+			#{date},
+			#{zyys},
+			#{zyysqzggwslb},
+			#{zyzlys},
+			#{zyzlysqzggwslb},
+			#{zcqkys},
+			#{qdqkyspxhgzdrs},
+			#{zchs},
+			#{zcs},
+			#{yss},
+			#{zys},
+			#{jyys},
+			#{yxys},
+			#{kfzls},
+			#{qtwsjsry}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ironfo_wsjsrygc SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			doc_id = #{doc_id},
+			date = #{date},
+			zyys = #{zyys},
+			zyysqzggwslb = #{zyysqzggwslb},
+			zyzlys = #{zyzlys},
+			zyzlysqzggwslb = #{zyzlysqzggwslb},
+			zcqkys = #{zcqkys},
+			qdqkyspxhgzdrs = #{qdqkyspxhgzdrs},
+			zchs = #{zchs},
+			zcs = #{zcs},
+			yss = #{yss},
+			zys = #{zys},
+			jyys = #{jyys},
+			yxys = #{yxys},
+			kfzls = #{kfzls},
+			qtwsjsry = #{qtwsjsry}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<update id="updateIronfo">
+		UPDATE ironfo_wsjsrygc SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			<!-- doc_id = #{doc_id}, -->
+			date = #{date},
+			zyys = #{zyys},
+			zyysqzggwslb = #{zyysqzggwslb},
+			zyzlys = #{zyzlys},
+			zyzlysqzggwslb = #{zyzlysqzggwslb},
+			zcqkys = #{zcqkys},
+			qdqkyspxhgzdrs = #{qdqkyspxhgzdrs},
+			zchs = #{zchs},
+			zcs = #{zcs},
+			yss = #{yss},
+			zys = #{zys},
+			jyys = #{jyys},
+			yxys = #{yxys},
+			kfzls = #{kfzls},
+			qtwsjsry = #{qtwsjsry}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM ironfo_wsjsrygc
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE ironfo_wsjsrygc SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="Ironfowsjsrygc" statementType="STATEMENT">
+		select * FROM ironfo_wsjsrygc  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>

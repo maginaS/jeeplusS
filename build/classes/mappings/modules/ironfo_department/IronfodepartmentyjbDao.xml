@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.ironfo_department.dao.IronfodepartmentyjbDao">
+    
+	<sql id="ironfodepartmentyjbColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.dep_id AS "dep_id",
+		a.yjk AS "yjk",
+		a.jyk AS "jyk",
+		a.fsk AS "fsk",
+		a.csk AS "csk",
+		a.xdtk AS "xdtk",
+		a.xdgys AS "xdgys",
+		a.sss AS "sss",
+		a.tjremark AS "tjremark"
+	</sql>
+	
+	<sql id="ironfodepartmentyjbJoins">
+	</sql>
+	
+    
+	<select id="get" resultType="Ironfodepartmentyjb" >
+		SELECT 
+			<include refid="ironfodepartmentyjbColumns"/>
+		FROM ironfo_department_yjb a
+		<include refid="ironfodepartmentyjbJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	
+	<select id="findList" resultType="Ironfodepartmentyjb" >
+		SELECT 
+			<include refid="ironfodepartmentyjbColumns"/>
+		FROM ironfo_department_yjb a
+		<include refid="ironfodepartmentyjbJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	
+	<select id="queryForList" resultType="Ironfodepartmentyjb" >
+		SELECT 
+			
+			a.id AS "id",
+			a.create_by AS "createBy.id",
+			a.create_date AS "createDate",
+			a.update_by AS "updateBy.id",
+			a.update_date AS "updateDate",
+			a.remarks AS "remarks",
+			a.del_flag AS "delFlag",
+			a.dep_id AS "dep_id",
+			a.yjk AS "yjk",
+			a.jyk AS "jyk",
+			a.fsk AS "fsk",
+			a.csk AS "csk",
+			a.xdtk AS "xdtk",
+			a.xdgys AS "xdgys",
+			a.sss AS "sss",
+			a.tjremark AS "tjremark",
+			a.doc_id AS "doc_id"
+		FROM ironfo_department_yjb a
+		
+		<where>
+			a.doc_id = #{doc_id}
+		</where>
+		
+	</select>
+	
+	<select id="findAllList" resultType="Ironfodepartmentyjb" >
+		SELECT 
+			<include refid="ironfodepartmentyjbColumns"/>
+		FROM ironfo_department_yjb a
+		<include refid="ironfodepartmentyjbJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ironfo_department_yjb(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			dep_id,
+			yjk,
+			jyk,
+			fsk,
+			csk,
+			xdtk,
+			xdgys,
+			sss,
+			tjremark,
+			doc_id
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{dep_id},
+			#{yjk},
+			#{jyk},
+			#{fsk},
+			#{csk},
+			#{xdtk},
+			#{xdgys},
+			#{sss},
+			#{tjremark},
+			#{doc_id}
+		)
+	</insert>
+	
+	<insert id="save">
+		INSERT INTO ironfo_department_yjb(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			dep_id,
+			yjk,
+			jyk,
+			fsk,
+			csk,
+			xdtk,
+			xdgys,
+			sss,
+			tjremark,
+			doc_id
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{dep_id},
+			#{yjk},
+			#{jyk},
+			#{fsk},
+			#{csk},
+			#{xdtk},
+			#{xdgys},
+			#{sss},
+			#{tjremark},
+			#{doc_id}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ironfo_department_yjb SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			dep_id = #{dep_id},
+			yjk = #{yjk},
+			jyk = #{jyk},
+			fsk = #{fsk},
+			csk = #{csk},
+			xdtk = #{xdtk},
+			xdgys = #{xdgys},
+			sss = #{sss},
+			tjremark = #{tjremark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateIronfo">
+		UPDATE ironfo_department_yjb SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			dep_id = #{dep_id},
+			yjk = #{yjk},
+			jyk = #{jyk},
+			fsk = #{fsk},
+			csk = #{csk},
+			xdtk = #{xdtk},
+			xdgys = #{xdgys},
+			sss = #{sss},
+			tjremark = #{tjremark},
+			doc_id = #{doc_id}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM ironfo_department_yjb
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE ironfo_department_yjb SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="Ironfodepartmentyjb" statementType="STATEMENT">
+		select * FROM ironfo_department_yjb  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>

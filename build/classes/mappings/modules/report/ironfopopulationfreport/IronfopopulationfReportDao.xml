@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.report.ironfopopulationfreport.dao.IronfopopulationfReportDao">
+    
+	<sql id="ironfopopulationfColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.jzmc AS "jzmc",
+		a.jzgn AS "jzgn",
+		a.dscs AS "dscs",
+		a.dxcs AS "dxcs",
+		a.trsysj AS "trsysj",
+		a.docid AS "docid"
+	</sql>
+	
+	<sql id="ironfopopulationfJoins">
+	</sql>
+	
+    
+	<select id="get" resultType="Ironfopopulationf" >
+		SELECT 
+			<include refid="ironfopopulationfColumns"/>
+		FROM ironfo_populationf a
+		<include refid="ironfopopulationfJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Ironfopopulationf" >
+		SELECT 
+			<include refid="ironfopopulationfColumns"/>
+		FROM ironfo_populationf a
+		<include refid="ironfopopulationfJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="docid != null and docid != '' ">
+    		AND a.docid = #{docid}
+		 	</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Ironfopopulationf" >
+		SELECT 
+			<include refid="ironfopopulationfColumns"/>
+		FROM ironfo_populationf a
+		<include refid="ironfopopulationfJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ironfo_populationf(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			populationf_jzmc,
+			populationf_jzgn,
+			populationf_dscs,
+			populationf_dxcs,
+			populationf_trsysj,
+			docid
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{populationf_jzmc},
+			#{populationf_jzgn},
+			#{populationf_dscs},
+			#{populationf_dxcs},
+			#{populationf_trsysj},
+			#{docid}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ironfo_populationf SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			populationf_jzmc = #{populationf_jzmc},
+			populationf_jzgn = #{populationf_jzgn},
+			populationf_dscs = #{populationf_dscs},
+			populationf_dxcs = #{populationf_dxcs},
+			populationf_trsysj = #{populationf_trsysj},
+			docid = #{docid}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM ironfo_populationf
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE ironfo_populationf SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="Ironfopopulationf" statementType="STATEMENT">
+		select * FROM ironfo_populationf  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>

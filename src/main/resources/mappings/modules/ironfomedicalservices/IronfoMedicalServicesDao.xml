@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.ironfomedicalservices.dao.IronfoMedicalServicesDao">
+    
+	<sql id="ironfoMedicalServicesColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.doc_id AS "doc_id",
+		a.date AS "date",
+		a.bzcw AS "bzcw",
+		a.sycw AS "sycw",
+		a.sjkfzcrs AS "sjkfzcrs",
+		a.sjzyzcrs AS "sjzyzcrs",
+		a.gccs AS "gccs",
+		a.zzlrcs AS "zzlrcs",
+		a.mzrcs AS "mzrcs",
+		a.jzrcs AS "jzrcs",
+		a.qzswrs AS "qzswrs",
+		a.cyrs AS "cyrs",
+		a.sjyyxxzzrcs AS "sjyyxxzzrcs",
+		a.xsjyyzzrcs AS "xsjyyzzrcs"
+	</sql>
+	
+	<sql id="ironfoMedicalServicesJoins">
+	</sql>
+	
+    
+	<select id="get" resultType="IronfoMedicalServices" >
+		SELECT 
+			<include refid="ironfoMedicalServicesColumns"/>
+		FROM ironfo_medical_services a
+		<include refid="ironfoMedicalServicesJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="IronfoMedicalServices" >
+		SELECT 
+			<include refid="ironfoMedicalServicesColumns"/>
+		FROM ironfo_medical_services a
+		<include refid="ironfoMedicalServicesJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	
+	
+	
+	
+	
+	<select id="queryForList" resultType="IronfoMedicalServices" >
+		SELECT 
+				a.id AS "id",
+				a.create_by AS "createBy.id",
+				a.create_date AS "createDate",
+				a.update_by AS "updateBy.id",
+				a.update_date AS "updateDate",
+				a.remarks AS "remarks",
+				a.del_flag AS "delFlag",
+				a.doc_id AS "doc_id",
+				a.date AS "date",
+				a.bzcw AS "bzcw",
+				a.sycw AS "sycw",
+				a.sjkfzcrs AS "sjkfzcrs",
+				a.sjzyzcrs AS "sjzyzcrs",
+				a.gccs AS "gccs",
+				a.zzlrcs AS "zzlrcs",
+				a.mzrcs AS "mzrcs",
+				a.jzrcs AS "jzrcs",
+				a.qzswrs AS "qzswrs",
+				a.cyrs AS "cyrs",
+				a.sjyyxxzzrcs AS "sjyyxxzzrcs",
+				a.xsjyyzzrcs AS "xsjyyzzrcs"
+			
+			
+		FROM ironfo_medical_services a
+		
+		<where>
+			a.doc_id = #{doc_id}
+		</where>
+	</select>
+	
+	
+	
+	
+	<select id="findAllList" resultType="IronfoMedicalServices" >
+		SELECT 
+			<include refid="ironfoMedicalServicesColumns"/>
+		FROM ironfo_medical_services a
+		<include refid="ironfoMedicalServicesJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ironfo_medical_services(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			doc_id,
+			date,
+			bzcw,
+			sycw,
+			sjkfzcrs,
+			sjzyzcrs,
+			gccs,
+			zzlrcs,
+			mzrcs,
+			jzrcs,
+			qzswrs,
+			cyrs,
+			sjyyxxzzrcs,
+			xsjyyzzrcs
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{doc_id},
+			#{date},
+			#{bzcw},
+			#{sycw},
+			#{sjkfzcrs},
+			#{sjzyzcrs},
+			#{gccs},
+			#{zzlrcs},
+			#{mzrcs},
+			#{jzrcs},
+			#{qzswrs},
+			#{cyrs},
+			#{sjyyxxzzrcs},
+			#{xsjyyzzrcs}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ironfo_medical_services SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			doc_id = #{doc_id},
+			date = #{date},
+			bzcw = #{bzcw},
+			sycw = #{sycw},
+			sjkfzcrs = #{sjkfzcrs},
+			sjzyzcrs = #{sjzyzcrs},
+			gccs = #{gccs},
+			zzlrcs = #{zzlrcs},
+			mzrcs = #{mzrcs},
+			jzrcs = #{jzrcs},
+			qzswrs = #{qzswrs},
+			cyrs = #{cyrs},
+			sjyyxxzzrcs = #{sjyyxxzzrcs},
+			xsjyyzzrcs = #{xsjyyzzrcs}
+		WHERE id = #{id}
+	</update>
+	
+	
+<!-- 	 parameterType="com.jeeplus.modules.ironfomedicalservices.entity.IronfoMedicalServices" -->
+	
+	<update id="updateIronfo">
+		UPDATE ironfo_medical_services 
+		
+		SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			bzcw = #{bzcw},
+			sycw = #{sycw},
+			sjkfzcrs = #{sjkfzcrs},
+			sjzyzcrs = #{sjzyzcrs},
+			gccs = #{gccs},
+			zzlrcs = #{zzlrcs},
+			mzrcs = #{mzrcs},
+			jzrcs = #{jzrcs},
+			qzswrs = #{qzswrs},
+			cyrs = #{cyrs},
+			sjyyxxzzrcs = #{sjyyxxzzrcs},
+			xsjyyzzrcs = #{xsjyyzzrcs}
+			
+		WHERE  id=#{id}
+		
+	</update>
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM ironfo_medical_services
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE ironfo_medical_services SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="IronfoMedicalServices" statementType="STATEMENT">
+		select * FROM ironfo_medical_services  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>

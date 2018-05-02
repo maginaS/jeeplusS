@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.report.ironfofiventzydjcnreport.dao.IronfofiventzydjcnReportDao">
+    
+	<sql id="ironfofiventzydjcnColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.doc_id AS "doc_id",
+		a.zykt AS "zykt",
+		a.ftkt AS "ftkt",
+		a.glcn AS "glcn",
+		a.dzq AS "dzq",
+		a.szrl AS "szrl"
+	</sql>
+	
+	<sql id="ironfofiventzydjcnJoins">
+	</sql>
+	
+    
+	<select id="get" resultType="Ironfofiventzydjcn" >
+		SELECT 
+			<include refid="ironfofiventzydjcnColumns"/>
+		FROM ironfo_five_ntzy_djcn a
+		<include refid="ironfofiventzydjcnJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Ironfofiventzydjcn" >
+		SELECT 
+			<include refid="ironfofiventzydjcnColumns"/>
+		FROM ironfo_five_ntzy_djcn a
+		<include refid="ironfofiventzydjcnJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="doc_id != null and doc_id != '' ">
+    		AND a.doc_id = #{doc_id}
+		 	</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Ironfofiventzydjcn" >
+		SELECT 
+			<include refid="ironfofiventzydjcnColumns"/>
+		FROM ironfo_five_ntzy_djcn a
+		<include refid="ironfofiventzydjcnJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ironfo_five_ntzy_djcn(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			doc_id,
+			zykt,
+			ftkt,
+			glcn,
+			dzq,
+			szrl
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{doc_id},
+			#{zykt},
+			#{ftkt},
+			#{glcn},
+			#{dzq},
+			#{szrl}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ironfo_five_ntzy_djcn SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			doc_id = #{doc_id},
+			zykt = #{zykt},
+			ftkt = #{ftkt},
+			glcn = #{glcn},
+			dzq = #{dzq},
+			szrl = #{szrl}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM ironfo_five_ntzy_djcn
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE ironfo_five_ntzy_djcn SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="Ironfofiventzydjcn" statementType="STATEMENT">
+		select * FROM ironfo_five_ntzy_djcn  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>

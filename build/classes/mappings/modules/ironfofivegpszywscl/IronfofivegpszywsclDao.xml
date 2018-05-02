@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.ironfofivegpszywscl.dao.IronfofivegpszywsclDao">
+    
+	<sql id="ironfofivegpszywsclColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.doc_id AS "doc_id",
+		a.wffl AS "wffl",
+		a.hfc AS "hfc",
+		a.clz AS "clz",
+		a.szjc AS "szjc"
+	</sql>
+	
+	<sql id="ironfofivegpszywsclJoins">
+	</sql>
+	
+    
+	<select id="get" resultType="Ironfofivegpszywscl" >
+		SELECT 
+			<include refid="ironfofivegpszywsclColumns"/>
+		FROM ironfo_five_gpszy_wscl a
+		<include refid="ironfofivegpszywsclJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	
+	
+	<select id="queryForList" resultType="Ironfofivegpszywscl" >
+		SELECT 
+			a.id AS "id",
+			a.create_by AS "createBy.id",
+			a.create_date AS "createDate",
+			a.update_by AS "updateBy.id",
+			a.update_date AS "updateDate",
+			a.remarks AS "remarks",
+			a.del_flag AS "delFlag",
+			a.doc_id AS "doc_id",
+			a.wffl AS "wffl",
+			a.hfc AS "hfc",
+			a.clz AS "clz",
+			a.szjc AS "szjc"
+		FROM ironfo_five_gpszy_wscl a
+		
+		<where>
+			a.doc_id = #{doc_id}
+		</where>
+		
+	</select>
+	
+	<select id="findList" resultType="Ironfofivegpszywscl" >
+		SELECT 
+			<include refid="ironfofivegpszywsclColumns"/>
+		FROM ironfo_five_gpszy_wscl a
+		<include refid="ironfofivegpszywsclJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Ironfofivegpszywscl" >
+		SELECT 
+			<include refid="ironfofivegpszywsclColumns"/>
+		FROM ironfo_five_gpszy_wscl a
+		<include refid="ironfofivegpszywsclJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ironfo_five_gpszy_wscl(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			doc_id,
+			wffl,
+			hfc,
+			clz,
+			szjc
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{doc_id},
+			#{wffl},
+			#{hfc},
+			#{clz},
+			#{szjc}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ironfo_five_gpszy_wscl SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			doc_id = #{doc_id},
+			wffl = #{wffl},
+			hfc = #{hfc},
+			clz = #{clz},
+			szjc = #{szjc}
+		WHERE id = #{id}
+	</update>
+	
+	
+	
+	<update id="updateIronfo">
+		UPDATE ironfo_five_gpszy_wscl SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			doc_id = #{doc_id},
+			wffl = #{wffl},
+			hfc = #{hfc},
+			clz = #{clz},
+			szjc = #{szjc}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM ironfo_five_gpszy_wscl
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE ironfo_five_gpszy_wscl SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="Ironfofivegpszywscl" statementType="STATEMENT">
+		select * FROM ironfo_five_gpszy_wscl  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>
